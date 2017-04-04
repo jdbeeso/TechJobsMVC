@@ -1,0 +1,37 @@
+﻿<h1>@ViewBag.title</h1>
+
+<form action="/Search/Index">
+    <h2>Search by:</h2>
+
+    <p>
+        @foreach (KeyValuePair<string, string> column in ViewBag.columns)
+        {
+            <span>
+                <input type="radio"
+                       name="searchType"
+                       id="@column.Key"
+                       value="@column.Key"
+                       checked="@column.Key == 'all''" />
+                <label for="@column.Key">@column.Value</label>
+            </span>
+        }
+    </p>
+
+    <p>
+        <label for="searchTerm">Keyword:</label>
+        <input type="text" name="searchTerm" id="searchTerm" />
+    </p>
+
+    <input type="submit" value="Search" asp-controller="Search" />
+</form>
+
+<hr />
+
+
+
+<h1>Results</h1>
+
+<p>This page does come up!</p>
+
+<p>@ViewBag.jobs</p>
+

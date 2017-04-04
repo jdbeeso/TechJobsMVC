@@ -1,6 +1,6 @@
 ﻿<h1>@ViewBag.title</h1>
 
-<form action="/Search/Results">
+<form method="post">
     <h2>Search by:</h2>
 
     <p>
@@ -22,7 +22,7 @@
         <input type="text" name="searchTerm" id="searchTerm" />
     </p>
 
-    <input type="submit" value="Search" />
+    <input type="submit" value="Search" asp-controller="Search"/>
 </form>
 
 <hr />
@@ -32,5 +32,22 @@
 
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-    // TODO #2 - Loop over jobs dictionary and display all job fields 
+    @if (ViewBag.jobs.Count == 0)
+    {
+         <p>No Jobs Available Currently</p>
+    }
+    else
+    {
+        
+        foreach (Dictionary<string, string> job in ViewBag.jobs)
+        { <table class="job-listing">
+            @foreach (string column in job.Keys)
+            {
+                 <tr><td>@column:</td> <td>@job[column]</td></tr>
+            }
+                 </table>
+          
+        
+        }       
+    }
 }
